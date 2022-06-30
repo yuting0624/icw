@@ -16,9 +16,14 @@ import model.LoginLogic;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("getでのエラー");
+		request.getRequestDispatcher("error.jsp").forward(request, response);	
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-
 			// リクエストパラメータを取得
 			request.setCharacterEncoding("UTF-8");
 			String accountId = request.getParameter("id");
@@ -41,14 +46,15 @@ public class Login extends HttpServlet {
 				request.getRequestDispatcher("index.html").forward(request, response);
 			} else {
 				//idまたはパスワードが不正
-				request.getRequestDispatcher("WEB-INF/loginError.jsp").forward(request, response);
+				request.getRequestDispatcher("loginError.jsp").forward(request, response);
 			}
 			
 			}
 		} catch(SQLException e) {
 			// フォワード
-			e.printStackTrace();
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);			
+			e.printStackTrace();		
+			System.out.println("postでのエラー");
+			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}	
 	}
 	

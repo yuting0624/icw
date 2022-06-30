@@ -31,6 +31,8 @@ public class Account {
 	// 電話番号
 	private String phoneNumber;
 	
+	private int deliFee ;
+
 	public Account() {
 		
 	}
@@ -128,6 +130,13 @@ public class Account {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public int getDeliFee() {
+		return deliFee;
+	}
+	
+	public void setDeliFee(int deliFee) {
+		this.deliFee = deliFee;
 	}
 
 

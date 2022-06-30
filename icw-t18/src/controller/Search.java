@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Search")
 public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/Search.jsp").forward(request,response);
+
+		request.getRequestDispatcher("search.jsp").forward(request,response);
 	}
 
 }

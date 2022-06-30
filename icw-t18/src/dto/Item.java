@@ -19,6 +19,11 @@ public class Item extends Account{
 	
 	/** URL */
 	private String image_url;
+	
+
+	private int sum= 0 ;
+	
+	private int total=0 ;
 
 	public Item(String itemId, String category, String name, String kana, Integer price,String comment,String image_url) {
 		this.itemId = itemId;
@@ -58,6 +63,11 @@ public class Item extends Account{
 	public String getImage_url() {
 		return image_url;
 	}
+	
+
+	public String getKana() {
+		return kana;
+	}
 
 	public void setItemId(String itemId) {
 		this.itemId = itemId;
@@ -85,6 +95,21 @@ public class Item extends Account{
 
 	public void setImage_url(String image_url) {
 		this.image_url = image_url;
+	}
+	public int getSum() {
+		return sum;
+	}
+	
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+	
+	public int getTotal() {
+		return total;
+	}
+	
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 	

@@ -43,33 +43,7 @@ public class HistoryDAO {
 			/* STEP 3:データベースとの接続を切断 */
 			db.closeConnection(con);
 		}
-		}
-		public int insert(History history) throws SQLException {
-			/* STEP 0:JDBCドライバの有効化 */
-				DBUtil db =new DBUtil();
-
-			Connection con = null;
-			try {
-				/* STEP 1:データベースの接続 */
-				con = db.getConnection();
-
-				/* STEP 2:SQL送信処理 */
-				String sql = "INSERT INTO ORDER(ORDERDATE,ORDERID,ITEMID,ORDERAMOUNT,TOTALPRICE,DELISTATUS) VALUES(?,?,?,?,?,?)";
-				PreparedStatement pstmt = con.prepareStatement(sql);
-				history=new History();
-				pstmt.setString(1, history.getOrderDate());
-				pstmt.setString(2, history.getOrderId());
-				pstmt.setString(3, history.getItemId());
-				pstmt.setInt(4, history.getOrderAmount());
-				pstmt.setInt(5, history.getTotalPrice());
-				pstmt.setString(6, history.getDeliStatus());
-				int r = pstmt.executeUpdate();
-				pstmt.close();
-				return r;
-
-			} finally {
-				/* STEP 3:データベースとの接続を切断 */
-				db.closeConnection(con);
-			}
 	}
 }
+		
+	

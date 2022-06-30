@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dto.Account;
 import dto.DeliFee;
 
 public class DeliFeeDAO {
 	
-	public DeliFee searchByAddress(String address1) throws SQLException {
+	public void searchByAddress(Account account) throws SQLException {
 		
 		DBUtil db = new DBUtil();
 		
@@ -21,16 +22,14 @@ public class DeliFeeDAO {
 			/* STEP 2:SQL送信処理 */
 			String sql = "SELECT * FROM ACCOUNT WHERE ADDRESS1=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, address1);
+			pstmt.setString(1, account.getAddress1());
 			ResultSet rs = pstmt.executeQuery();
 			DeliFee deliFee = null;
 			if (rs.next()) {
-				deliFee = new DeliFee();
-				deliFee.setAddress1(rs.getString("ADDRESS1"));
-				deliFee.setDeliFee(rs.getInt("DELIFEE"));
+				account.setDeliFee(rs.getInt("DELIFEE"));
 			}
 			pstmt.close();
-			return deliFee;
+			return ;
 		} finally {
 			/* STEP 3:データベースとの接続を切断 */
 			db.closeConnection(con);

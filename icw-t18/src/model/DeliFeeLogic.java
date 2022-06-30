@@ -1,20 +1,27 @@
 package model;
 
+import javax.servlet.http.HttpSession;
+
 import dao.DeliFeeDAO;
 import dto.Account;
+import dto.Item;
 
 public class DeliFeeLogic {
-	public int buylogic(Account account,int amount)throws Exception{
-		
+	public int buyLogic(Account account,int amount)throws Exception{
+	
+	//セッションスコープからitemを取得
+	HttpSession session =request.getSession();
+	Item item = (Item) session.getAttribute("item");
 	DeliFeeDAO dao= new DeliFeeDAO();
-	dao.searchByAddress(account.getAddress1());
+	dao.searchByAddress(account);
 	
 	
+	int sum = item.getPrice()*amount;
+	item.setSum(sum);
+	int total = sum +account.getDeliFee();
+	item.setTotal(total);
 	
-	int sum = itemList.price*amount;
-	int total = sum +dao.deliFee;
-			
-	return total;
+	return item;
 	}
 	
 }

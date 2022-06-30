@@ -19,7 +19,7 @@ import dto.Item;
 import dto.ItemList;
 
 	public class ItemDAO {
-		public List<Item> search(String keyword, String category, int priceMin, int priceMax, int offset, int limit, String sort, String order) throws SQLException {
+		public ItemList search(String keyword, String category, int priceMin, int priceMax, int offset, int limit, String sort, String order) throws Exception {
 			List<Item> list = new ArrayList<Item>();
 			ItemList itemList = new ItemList();
 			// WebAPIにリクエストを送信（基本的に決まり文句）リクエスト先のURIだけ変更する。
@@ -61,9 +61,10 @@ import dto.ItemList;
 				itemList.setItems(list);
 				return itemList;
 			}
-			
+			else {
+				throw new Exception();
+			}
 		}
-		
 		public Item selectByKey(String id) throws Exception {
 			// public static void main(String[] args) {
 			Item item = new Item();
@@ -99,18 +100,17 @@ import dto.ItemList;
 			
 			}
 		
-		
 			public List<Item> searchByName(String name) throws SQLException {
-				/* STEP 0:JDBCドライバの有効化 */
+				// STEP 0:JDBCドライバの有効化
 				DBUtil db = new DBUtil();
 
 				Connection con = null;
 				try {
-					/* STEP 1:データベースの接続 */
+					// STEP 1:データベースの接続
 					con = db.getConnection();
 
-					/* STEP 2:SQL送信処理 */
-					String sql = "SELECT * FROM ITEM WHERE ID=? ";
+					// STEP 2:SQL送信処理
+					String sql = "SELECT * FROM ITEM WHERE NAME=? ";
 					PreparedStatement pstmt = con.prepareStatement(sql);
 					pstmt.setString(1,  name);
 					ResultSet rs = pstmt.executeQuery();
@@ -129,21 +129,21 @@ import dto.ItemList;
 					pstmt.close();
 					return list;
 				} finally {
-					/* STEP 3:データベースとの接続を切断 */
+					// STEP 3:データベースとの接続を切断
 					db.closeConnection(con);
 				}
 			}
-			
+	
 			public List<Item> searchById(String itemId) throws SQLException {
-				/* STEP 0:JDBCドライバの有効化 */
+				// STEP 0:JDBCドライバの有効化
 				DBUtil db = new DBUtil();
 
 				Connection con = null;
 				try {
-					/* STEP 1:データベースの接続 */
+					// STEP 1:データベースの接続 
 					con = db.getConnection();
 
-					/* STEP 2:SQL送信処理 */
+					// STEP 2:SQL送信処理
 					String sql = "SELECT * FROM ITEM WHERE ID=? ";
 					PreparedStatement pstmt = con.prepareStatement(sql);
 					pstmt.setString(1,  itemId);
@@ -163,9 +163,28 @@ import dto.ItemList;
 					pstmt.close();
 					return list;
 				} finally {
-					/* STEP 3:データベースとの接続を切断 */
+					// STEP 3:データベースとの接続を切断
 					db.closeConnection(con);
 				}
+			}
+			public List<Item> searchByNameDB(String name) throws SQLException {
+					List<Item> list = new ArrayList<>();
+					for(int i = 1; i<3 ; i++) {
+						Item item = new Item();
+						item.setItemId("IDa");
+						item.setCategory("Cate1");
+						item.setName("Name1");
+						item.setPrice(1111);
+						item.setComment("comment");
+						item.setImage_url("./img/products/tomato.jpg");
+						
+						
+						
+						list.add(item);
+						System.out.println(list.get(0));
+					}
+					System.out.println(list);
+					return list;
 			}
 		}
 

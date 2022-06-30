@@ -78,8 +78,8 @@ public class SearchResult extends HttpServlet {
 		request.setAttribute("productsList", itemList);
 		request.setAttribute("keyword", inputKeyword);
 		request.setAttribute("category", Category);
-		request.setAttribute("priceLow", inputPriceMin);
-		request.setAttribute("priceHigh", inputPriceMax);
+		request.setAttribute("priceMin", inputPriceMin);
+		request.setAttribute("priceMax", inputPriceMax);
 		request.setAttribute("offset", offset);
 		request.setAttribute("sort", sort);
 		request.setAttribute("order", order);

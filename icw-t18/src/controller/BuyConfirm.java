@@ -30,7 +30,9 @@ public class BuyConfirm extends HttpServlet {
 		
 		if (confirmLogic(true)) {
 			request.getRequestDispatcher("WEB-INF/buyOK.jsp").forward(request, response);
-		} 
+		} else {
+			request.getRequestDispatcher("WEB-INF/buyConfirm.jsp").forward(request, response);
+		}
 		
 		
 	
